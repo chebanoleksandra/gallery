@@ -1,0 +1,133 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Untitled Document</title>
+	<style>
+		img {
+			border: 3px solid #ccc;
+			margin: 10px;
+			cursor: pointer;
+		}
+
+		.button {
+			border: none;
+		}
+
+		.bigButton {
+			width: 70px;
+			border: none;
+		}
+
+		body {
+			background-color: bisque;
+		}
+
+		#themeImg {
+			width: 50px;
+			border: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="text-align:center; padding-top:30px;">
+		<img src="images/back.jpg" class="button" onclick="changeTumbs(false)" />
+		<img src="images/i1.jpg" name="1" onclick="openImage(this)" />
+		<img src="images/i2.jpg" name="2" onclick="openImage(this)" />
+		<img src="images/i3.jpg" name="3" onclick="openImage(this)" />
+		<img src="images/next.jpg" class="button" onclick="changeTumbs(true)" />
+	</div>
+
+	<div style="text-align:center;">
+		<img src="images/bigBack.png" class="bigButton" onclick="changeBig(false)">
+		<img style="cursor:default;" src="images/i1_big.jpg" name="big" ешеду="Фантастические фрукты" />
+		<img src="images/bigNext.png" class="bigButton" onclick="changeBig(true)">
+	</div>
+	<div style="width: 1200px; text-align:right;">
+		<img src="images/theme0.png" id="themeImg" name="themeImg" alt="Theme image" onclick="changeTheme()">
+	</div>
+
+	<script>
+		let bigIndex = 1;
+		let themeIndex = 0;
+		function openImage(pic) {
+			bigIndex = parseInt(pic.name);
+			document.images["big"].src = "images/i" + pic.name + "_big.jpg"
+
+		}
+		function changeTumbs(flag) {
+			if (flag) {
+				if (document.images[3].name == 9) {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = i;
+						document.images[i].src = "images/i" + i + ".jpg";
+					}
+				}
+				else {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = parseInt(document.images[i].name) + 3;
+						document.images[i].src = "images/i" + document.images[i].name + ".jpg";
+					}
+				}
+			}
+			else {
+				if (document.images[1].name == 1) {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = i + 6;
+						document.images[i].src = "images/i" + (i + 6) + ".jpg";
+					}
+				}
+				else {
+					for (var i = 1; i <= 3; i++) {
+						document.images[i].name = parseInt(document.images[i].name) - 3;
+						document.images[i].src = "images/i" + document.images[i].name + ".jpg";
+					}
+				}
+			}
+		}
+
+		function changeBig(flag) {
+			if (flag) {
+				if (bigIndex == 9) {
+					bigIndex = 1;
+					document.images["big"].src = "images/i" + bigIndex + "_big.jpg";
+				}
+				else {
+					bigIndex++;
+					document.images["big"].src = "images/i" + bigIndex + "_big.jpg";
+				}
+
+			}
+			else {
+				if (bigIndex == 1) {
+					bigIndex = 9;
+					document.images["big"].src = "images/i" + bigIndex + "_big.jpg";
+				}
+				else {
+					bigIndex--;
+					document.images["big"].src = "images/i" + bigIndex + "_big.jpg";
+					console.log(bigIndex);
+				}
+			}
+		}
+
+		function changeTheme() {
+			if (themeIndex == 0) {
+				themeIndex = 1;
+				document.body.style.backgroundColor = "#151B54";
+				document.images["themeImg"].src = "images/theme" + themeIndex + ".png";
+			}
+			else {
+				themeIndex = 0;
+				document.body.style.backgroundColor = "bisque";
+				document.images["themeImg"].src = "images/theme" + themeIndex + ".png";
+			}
+		}
+	</script>
+
+</body>
+
+</html>
